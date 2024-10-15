@@ -2,6 +2,23 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from newspaper_app.models import Newspaper
 from newspaper_app.forms import NewspaperForm
+from newspaper_app.models import Newspaper, Redactor, Topic
+
+
+def home(request):
+    # Подсчитываем количество газет, редакторов и статей
+    newspaper_count = Newspaper.objects.count()
+    redactor_count = Redactor.objects.count()
+    topic_count = Topic.objects.count()
+
+    # Передаем эти данные в шаблон
+    context = {
+        'newspaper_count': newspaper_count,
+        'redactor_count': redactor_count,
+        'topic_count': topic_count,
+    }
+
+    return render(request, 'home.html', context)
 
 # Список газет
 def newspaper_list(request):

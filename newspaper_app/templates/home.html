@@ -1,2 +1,19 @@
-<h1>Welcome to Newspaper Agency</h1>
-<p><a href="{% url 'newspaper_list' %}">View Newspapers</a></p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная страница</title>
+</head>
+<body>
+    <h1>Добро пожаловать в Newspaper Agency</h1>
+
+    <div>
+        <h2>Информация</h2>
+        <p>Количество газет: {{ newspaper_count }}</p>
+        <p>Количество редакторов: {{ redactor_count }}</p>
+        <p>Количество статей/тем: {{ topic_count }}</p>
+    </div>
+    <p><a href="{% url 'newspaper_list' %}">View Newspapers</a></p>
+</body>
+</html>

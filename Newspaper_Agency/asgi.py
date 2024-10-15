@@ -1,5 +1,5 @@
 """
-ASGI config for Newspaper_Agency project.
+ASGI config for newspaper_agency project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Newspaper_Agency.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'newspaper_agency.settings')
 
 application = get_asgi_application()
