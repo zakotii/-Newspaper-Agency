@@ -3,26 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home page</title>
-    <!-- Подключение Bootstrap -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-pzjw8f+ua7Kw1TIqKw1T+2rnobK6UY1zUeHma+6B4CpUjjWjjwDXE7cF5D8kLh9" crossorigin="anonymous">
+    <title>Newspaper Agency Home</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <div class="container-fluid">
     <div class="row">
-        <!-- Боковая панель слева -->
-        <div class="col-sm-3 bg-light">
-            <h4>Sidebar</h4>
+        <!-- Sidebar -->
+        <div class="col-sm-3 bg-light p-3">
+            <h5></h5>
             <ul class="list-unstyled">
-                <li>User: {{ request.user.username }}</li>
-                <li><a href="{% url 'newspaper_list' %}">Газеты</a></li>
+                <li>User: admin.user</li>
+                <li><a href="{% url 'home' %}">Home</a></li>
                 <li><a href="{% url 'redactor_list' %}">Редакторы</a></li>
                 <li><a href="{% url 'topic_list' %}">Статьи/Темы</a></li>
                 <li><a href="{% url 'logout' %}">Logout</a></li>
             </ul>
         </div>
-        
-        <!-- Основное содержимое -->
+
+        <!-- Main Content -->
         <div class="col-sm-9">
             <h1>Welcome to Newspaper Agency</h1>
             <h2>Information</h2>
@@ -36,9 +36,9 @@
     </div>
 </div>
 
-<!-- Скрипты Bootstrap (если необходимы для динамических элементов) -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
