@@ -53,3 +53,12 @@ def newspaper_update(request, pk):
     else:
         form = NewspaperForm(instance=newspaper)
     return render(request, 'newspaper_form.html', {'form': form})
+
+
+def redactor_list(request):
+    redactors = Redactor.objects.all()
+    return render(request, 'redactor_list.html', {'redactors': redactors})
+
+def topic_list(request):
+    topics = Topic.objects.all()  # Получаем список тем
+    return render(request, 'topic_list.html', {'topics': topics})

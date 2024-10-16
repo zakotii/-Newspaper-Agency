@@ -1,0 +1,17 @@
+<!-- topic_list.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список тем</title>
+</head>
+<body>
+    <h1>Список тем</h1>
+    <ul>
+        {% for topic in topics %}
+            <li>{{ topic.name }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
