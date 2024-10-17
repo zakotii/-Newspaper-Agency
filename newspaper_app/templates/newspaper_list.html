@@ -1,3 +1,8 @@
+{% extends 'base.html' %}
+
+{% block title %}Список редакторов{% endblock %}
+
+{% block content %}
 <h1>List of Newspapers</h1>
 <a href="{% url 'newspaper_create' %}">Create new Newspaper</a>
 <ul>
@@ -12,3 +17,4 @@
         </li>
     {% endfor %}
 </ul>
+{% endblock %}
