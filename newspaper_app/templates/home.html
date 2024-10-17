@@ -1,44 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Newspaper Agency Home</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-<div class="container-fluid">
-    <div class="row">
-        <!-- Sidebar -->
-        <div class="col-sm-3 bg-light p-3">
-            <h5></h5>
-            <ul class="list-unstyled">
-                <li>User: admin.user</li>
-                <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="{% url 'redactor_list' %}">Редакторы</a></li>
-                <li><a href="{% url 'topic_list' %}">Статьи/Темы</a></li>
-                <li><a href="{% url 'logout' %}">Logout</a></li>
-            </ul>
-        </div>
+{% extends 'base.html' %}
 
-        <!-- Main Content -->
-        <div class="col-sm-9">
-            <h1>Welcome to Newspaper Agency</h1>
-            <h2>Information</h2>
-            <ul>
-                <li>Number of newspapers: {{ newspaper_count }}</li>
-                <li>Number of editors: {{ redactor_count }}</li>
-                <li>Number of articles/topics: {{ topic_count }}</li>
-            </ul>
-            <p><a href="{% url 'newspaper_list' %}">View Newspapers</a></p>
-        </div>
-    </div>
-</div>
+{% block title %}Главная страница{% endblock %}
 
-<!-- Bootstrap JS and dependencies -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-</body>
-</html>
+{% block content %}
+    <h1>Добро пожаловать в Newspaper Agency</h1>
+    <h2>Информация</h2>
+    <ul>
+        <li>Количество газет: {{ newspaper_count }}</li>
+        <li>Количество редакторов: {{ redactor_count }}</li>
+        <li>Количество статей/тем: {{ topic_count }}</li>
+    </ul>
+    <p><a href="{% url 'newspaper_list' %}">View Newspapers</a></p>
+{% endblock %}
