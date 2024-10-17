@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from . import views
 from .views import home
-
+from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
@@ -29,4 +29,5 @@ urlpatterns = [
     path('newspaper/<int:pk>/update/', views.newspaper_update, name='newspaper_update'),
     path('redactors/', views.redactor_list, name='redactor_list'),
     path('topics/', views.topic_list, name='topic_list'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='home'), name='logout'),
     ]
