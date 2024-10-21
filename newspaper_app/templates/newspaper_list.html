@@ -4,7 +4,7 @@
 
 {% block content %}
 <h1>List of Newspapers</h1>
-<a href="{% url 'newspaper_create' %}">Create new Newspaper</a>
+<a href="{% url 'newspaper_create' %}" class="btn btn-primary">Create new Newspaper</a>
 <ul>
     {% for newspaper in newspapers %}
         <li>
@@ -13,7 +13,9 @@
             <p>Published on: {{ newspaper.published_date }}</p>
             <p>Topics: {{ newspaper.topics.all|join:", " }}</p>
             <p>Publishers: {{ newspaper.publishers.all|join:", " }}</p>
-            <a href="{% url 'newspaper_update' newspaper.pk %}">Edit</a>
+            <form action="{% url 'newspaper_update' newspaper.pk %}" method="get">
+                <button type="submit" class="btn btn-warning">Edit</button>
+            </form> 
         </li>
     {% endfor %}
 </ul>
