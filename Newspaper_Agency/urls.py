@@ -1,10 +1,25 @@
 from django.contrib import admin
 from django.urls import path, include
 from . import views
-from .views import home
+from .views import home, admin_dashboard
 from django.contrib.auth import views as auth_views
+from .views import RedactorUpdateView, RedactorDeleteView, TopicUpdateView, TopicDeleteView, RedactorCreateView, TopicCreateView
+
 
 urlpatterns = [
+    path('admin_dashboard/', views.admin_dashboard, name='admin_dashboard'),
+    path('newspaper/<int:pk>/update/', views.NewspaperUpdateView.as_view(), name='newspaper_update'),
+    path('newspaper/<int:pk>/delete/', views.NewspaperDeleteView.as_view(), name='newspaper_delete'),
+    # Редакторы
+    path('redactor/<int:pk>/update/', RedactorUpdateView.as_view(), name='redactor_update'),
+    path('redactor/<int:pk>/delete/', RedactorDeleteView.as_view(), name='redactor_delete'),
+    # Темы
+    path('topic/<int:pk>/update/', TopicUpdateView.as_view(), name='topic_update'),
+    path('topic/<int:pk>/delete/', TopicDeleteView.as_view(), name='topic_delete'),
+
+    path('redactor/create/', RedactorCreateView.as_view(), name='redactor_create'),
+    path('topic/create/', TopicCreateView.as_view(), name='topic_create'),
+
     # Главная страница
     path("", home, name="home"),
 

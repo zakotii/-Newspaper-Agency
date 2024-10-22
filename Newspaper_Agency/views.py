@@ -4,7 +4,80 @@ from newspaper_app.models import Newspaper, Redactor, Topic  # Удалено д
 from newspaper_app.forms import NewspaperForm
 from django.contrib.auth.decorators import login_required  # Для декораторов
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView
+from django.urls import reverse_lazy
+from django.views.generic import UpdateView, DeleteView
+
+
+@login_required
+def admin_dashboard(request):
+    newspapers = Newspaper.objects.all()
+    redactors = Redactor.objects.all()
+    topics = Topic.objects.all()
+
+    context = {
+        'newspapers': newspapers,
+        'redactors': redactors,
+        'topics': topics
+    }
+    
+    return render(request, 'admin_dashboard.html', context)
+
+# Обновление газеты
+class NewspaperUpdateView(UpdateView):
+    model = Newspaper
+    fields = ['title', 'content', 'published_date', 'topic', 'redactor']
+    template_name = 'newspaper_form.html'
+    success_url = reverse_lazy('admin_dashboard')
+
+# Удаление газеты
+class NewspaperDeleteView(DeleteView):
+    model = Newspaper
+    template_name = 'newspaper_confirm_delete.html'
+    success_url = reverse_lazy('admin_dashboard')
+
+
+# Обновление редактора (Redactor)
+class RedactorUpdateView(UpdateView):
+    model = Redactor
+    fields = ['first_name', 'last_name', 'email', 'hire_date']
+    template_name = 'redactor_form.html'
+    success_url = reverse_lazy('admin_dashboard')
+
+
+# Создание нового редактора (Redactor)
+class RedactorCreateView(CreateView):
+    model = Redactor
+    fields = ['first_name', 'last_name', 'email', 'hire_date']
+    template_name = 'redactor_form.html'
+    success_url = reverse_lazy('admin_dashboard')
+
+# Удаление редактора (Redactor)
+class RedactorDeleteView(DeleteView):
+    model = Redactor
+    template_name = 'redactor_confirm_delete.html'
+    success_url = reverse_lazy('admin_dashboard')
+
+
+# Создание новой темы (Topic)
+class TopicCreateView(CreateView):
+    model = Topic
+    fields = ['name']
+    template_name = 'topic_form.html'
+    success_url = reverse_lazy('admin_dashboard')
+
+# Обновление темы (Topic)
+class TopicUpdateView(UpdateView):
+    model = Topic
+    fields = ['name']
+    template_name = 'topic_form.html'
+    success_url = reverse_lazy('admin_dashboard')
+
+# Удаление темы (Topic)
+class TopicDeleteView(DeleteView):
+    model = Topic
+    template_name = 'topic_confirm_delete.html'
+    success_url = reverse_lazy('admin_dashboard')
 
 
 def home(request):
