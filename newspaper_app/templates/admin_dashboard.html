@@ -1,100 +1,95 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="container mt-5">
-        <h1 class="mb-4">Admin Dashboard</h1>
-        
-        <!-- Газеты -->
-        <h2>Newspapers</h2>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Content</th>
-                    <th>Published Date</th>
-                    <th>Topic</th>
-                    <th>Redactor</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for newspaper in newspapers %}
-                <tr>
-                    <td>{{ newspaper.title }}</td>
-                    <td>{{ newspaper.content|truncatewords:10 }}</td>
-                    <td>{{ newspaper.published_date }}</td>
-                    <td>{{ newspaper.topic.name }}</td>
-                    <td>{{ newspaper.redactor.first_name }} {{ newspaper.redactor.last_name }}</td>
-                    <td>
-                        <a href="{% url 'newspaper_update' newspaper.pk %}" class="btn btn-primary btn-sm">Edit</a>
-                        <a href="{% url 'newspaper_delete' newspaper.pk %}" class="btn btn-danger btn-sm">Delete</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+{% extends 'base.html' %}
 
-        <!-- Редакторы -->
-        <h2>Redactors</h2>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Hire Date</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for redactor in redactors %}
-                <tr>
-                    <td>{{ redactor.first_name }}</td>
-                    <td>{{ redactor.last_name }}</td>
-                    <td>{{ redactor.email }}</td>
-                    <td>{{ redactor.hire_date }}</td>
-                    <td>
-                        <a href="{% url 'redactor_update' redactor.pk %}" class="btn btn-primary btn-sm">Edit</a>
-                        <a href="{% url 'redactor_delete' redactor.pk %}" class="btn btn-danger btn-sm">Delete</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+{% block title %}
+Admin Dashboard
+{% endblock %}
 
-        <!-- Темы -->
-        <h2>Topics</h2>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Topic Name</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for topic in topics %}
-                <tr>
-                    <td>{{ topic.name }}</td>
-                    <td>
-                        <a href="{% url 'topic_update' topic.pk %}" class="btn btn-primary btn-sm">Edit</a>
-                        <a href="{% url 'topic_delete' topic.pk %}" class="btn btn-danger btn-sm">Delete</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+{% block content %}
+    <h1 class="mb-4">Admin Dashboard</h1>
+    
+    <!-- Газеты -->
+    <h2>Newspapers</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Published Date</th>
+                <th>Topic</th>
+                <th>Redactor</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for newspaper in newspapers %}
+            <tr>
+                <td>{{ newspaper.title }}</td>
+                <td>{{ newspaper.content|truncatewords:10 }}</td>
+                <td>{{ newspaper.published_date }}</td>
+                <td>{{ newspaper.topic.name }}</td>
+                <td>{{ newspaper.redactor.first_name }} {{ newspaper.redactor.last_name }}</td>
+                <td>
+                    <a href="{% url 'newspaper_update' newspaper.pk %}" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="{% url 'newspaper_delete' newspaper.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
-        <!-- Кнопки для создания новых записей -->
-        <a href="{% url 'newspaper_create' %}" class="btn btn-success">Add New Newspaper</a>
-        <a href="{% url 'redactor_create' %}" class="btn btn-success">Add New Redactor</a>
-        <a href="{% url 'topic_create' %}" class="btn btn-success">Add New Topic</a>
+    <!-- Редакторы -->
+    <h2>Redactors</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Hire Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for redactor in redactors %}
+            <tr>
+                <td>{{ redactor.first_name }}</td>
+                <td>{{ redactor.last_name }}</td>
+                <td>{{ redactor.email }}</td>
+                <td>{{ redactor.hire_date }}</td>
+                <td>
+                    <a href="{% url 'redactor_update' redactor.pk %}" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="{% url 'redactor_delete' redactor.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
-    </div>
-</body>
-</html>
+    <!-- Темы -->
+    <h2>Topics</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Topic Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for topic in topics %}
+            <tr>
+                <td>{{ topic.name }}</td>
+                <td>
+                    <a href="{% url 'topic_update' topic.pk %}" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="{% url 'topic_delete' topic.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Кнопки для создания новых записей -->
+    <a href="{% url 'newspaper_create' %}" class="btn btn-success">Add New Newspaper</a>
+    <a href="{% url 'redactor_create' %}" class="btn btn-success">Add New Redactor</a>
+    <a href="{% url 'topic_create' %}" class="btn btn-success">Add New Topic</a>
+
+{% endblock %}
