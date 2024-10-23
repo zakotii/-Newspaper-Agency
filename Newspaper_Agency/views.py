@@ -7,6 +7,20 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, CreateView
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView, DeleteView
+from django.db.models import Q
+
+
+class TopicListView(ListView):
+    model = Topic
+    template_name = 'topic_list.html'
+    context_object_name = 'topics'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        query = self.request.GET.get('q')
+        if query:
+            queryset = queryset.filter(Q(name__icontains=query))
+        return queryset
 
 
 @login_required
@@ -144,8 +158,15 @@ def redactor_list(request):
     redactors = Redactor.objects.all()
     return render(request, 'redactor_list.html', {'redactors': redactors})
 
-# Список тем/статей
-@login_required  # Добавлен декоратор
+
+@login_required
 def topic_list(request):
-    topics = Topic.objects.all()  # Получаем список тем
+    query = request.GET.get('q')  # Получаем поисковый запрос, если он есть
+    if query:
+        # Если запрос есть, ищем темы по части строки (name содержит query)
+        topics = Topic.objects.filter(Q(name__icontains=query))
+    else:
+        # Если запроса нет, показываем все темы
+        topics = Topic.objects.all()
+
     return render(request, 'topic_list.html', {'topics': topics})

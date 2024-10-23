@@ -3,10 +3,11 @@ from django.urls import path, include
 from . import views
 from .views import home, admin_dashboard
 from django.contrib.auth import views as auth_views
-from .views import RedactorUpdateView, RedactorDeleteView, TopicUpdateView, TopicDeleteView, RedactorCreateView, TopicCreateView
+from .views import RedactorUpdateView, RedactorDeleteView, TopicUpdateView, TopicDeleteView, RedactorCreateView, TopicCreateView, TopicListView
 
 
 urlpatterns = [
+    path('topic/', TopicListView.as_view(), name='topic_list'),
     path('admin_dashboard/', views.admin_dashboard, name='admin_dashboard'),
     path('newspaper/<int:pk>/update/', views.NewspaperUpdateView.as_view(), name='newspaper_update'),
     path('newspaper/<int:pk>/delete/', views.NewspaperDeleteView.as_view(), name='newspaper_delete'),

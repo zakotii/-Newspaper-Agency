@@ -1,16 +1,29 @@
 {% extends 'base.html' %}
 
-{% block title %}Список редакторов{% endblock %}
+{% block title %}Список тем{% endblock %}
 
 {% block content %}
 <title>Список тем</title>
 </head>
 <body>
 <h1>Список тем</h1>
-    <ul>
+
+<!-- Форма поиска -->
+<form method="GET" action="{% url 'topic_list' %}" class="form-inline mb-3">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search by topic" name="q" value="{{ request.GET.q }}">
+    <button class="btn btn-outline-primary" type="submit">Search</button>
+</form>
+
+<!-- Список тем -->
+<ul>
+    {% if topics %}
         {% for topic in topics %}
-        <li>{{ topic.name }}</li>
+            <li>{{ topic.name }}</li>
         {% endfor %}
-    </ul>
+    {% else %}
+        <li>There are no such topics.</li>
+    {% endif %}
+</ul>
+
 </body>
 {% endblock %}
