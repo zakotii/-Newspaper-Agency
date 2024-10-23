@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Update Topic
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>{% if form.instance.pk %}Update Topic{% else %}Create Topic{% endif %}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Save</button>
+    </form>
+    <a href="{% url 'admin_dashboard' %}" class="btn btn-secondary">Back to Dashboard</a>
+</div>
+{% endblock %}
