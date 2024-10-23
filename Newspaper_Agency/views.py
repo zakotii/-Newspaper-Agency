@@ -153,9 +153,14 @@ def newspaper_update(request, pk):
     return render(request, 'newspaper_form.html', {'form': form})
 
 # Список редакторов
-@login_required  # Добавлен декоратор
+@login_required
 def redactor_list(request):
-    redactors = Redactor.objects.all()
+    query = request.GET.get('q')  # Получаем поисковый запрос из GET-параметров
+    if query:
+        redactors = Redactor.objects.filter(first_name__icontains=query)  # Поиск по имени (регистронезависимый)
+    else:
+        redactors = Redactor.objects.all()  # Если запроса нет, отображаем всех редакторов
+    
     return render(request, 'redactor_list.html', {'redactors': redactors})
 
 

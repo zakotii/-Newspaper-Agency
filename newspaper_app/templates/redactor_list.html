@@ -4,24 +4,36 @@
 
 {% block content %}
     <h1>Список редакторов</h1>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Имя</th>
-                <th>Фамилия</th>
-                <th>Email</th>
-                <th>Дата найма</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for redactor in redactors %}
-            <tr>
-                <td>{{ redactor.first_name }}</td>
-                <td>{{ redactor.last_name }}</td>
-                <td>{{ redactor.email }}</td>
-                <td>{{ redactor.hire_date }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+
+    <!-- Форма поиска -->
+    <form method="GET" action="{% url 'redactor_list' %}" class="form-inline mb-3">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search by first name" name="q" value="{{ request.GET.q }}">
+        <button class="btn btn-outline-primary" type="submit">Search</button>
+    </form>
+
+    <!-- Список редакторов -->
+    {% if redactors %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Имя</th>
+                    <th>Фамилия</th>
+                    <th>Email</th>
+                    <th>Дата найма</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for redactor in redactors %}
+                <tr>
+                    <td>{{ redactor.first_name }}</td>
+                    <td>{{ redactor.last_name }}</td>
+                    <td>{{ redactor.email }}</td>
+                    <td>{{ redactor.hire_date }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>There is no such name.</p>
+    {% endif %}
 {% endblock %}
