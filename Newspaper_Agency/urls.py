@@ -7,6 +7,7 @@ from .views import RedactorUpdateView, RedactorDeleteView, TopicUpdateView, Topi
 
 
 urlpatterns = [
+    path('newspapers/', views.newspaper_list, name='newspaper_list'),
     path('topic/', TopicListView.as_view(), name='topic_list'),
     path('admin_dashboard/', views.admin_dashboard, name='admin_dashboard'),
     path('newspaper/<int:pk>/update/', views.NewspaperUpdateView.as_view(), name='newspaper_update'),

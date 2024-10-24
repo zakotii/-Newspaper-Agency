@@ -109,11 +109,17 @@ def home(request):
 
     return render(request, 'home.html', context)
 
-# Список газет
-@login_required  # Добавлен декоратор
+# Список газет с поиском по заголовку
+@login_required
 def newspaper_list(request):
-    newspapers = Newspaper.objects.all()
+    query = request.GET.get('q')  # Получаем параметр 'q' из GET запроса (поле поиска)
+    if query:
+        newspapers = Newspaper.objects.filter(title__icontains=query)  # Поиск по заголовку
+    else:
+        newspapers = Newspaper.objects.all()  # Если нет запроса, выводим все газеты
+    
     return render(request, 'newspaper_list.html', {'newspapers': newspapers})
+    
 
 # Классовое представление с ограничением доступа
 class NewspaperListView(LoginRequiredMixin, ListView):

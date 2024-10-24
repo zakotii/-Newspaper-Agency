@@ -1,12 +1,21 @@
 {% extends 'base.html' %}
 
-{% block title %}Список редакторов{% endblock %}
+{% block title %}List of Newspapers{% endblock %}
 
 {% block content %}
 <h1>List of Newspapers</h1>
+
+<!-- Форма поиска по заголовку -->
+<form method="GET" action="{% url 'newspaper_list' %}" class="form-inline mb-3">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search by Title" name="q" value="{{ request.GET.q }}">
+    <button class="btn btn-outline-primary" type="submit">Search</button>
+</form>
+
 <a href="{% url 'newspaper_create' %}" class="btn btn-primary">Create new Newspaper</a>
+
 <ul>
-    {% for newspaper in newspapers %}
+    {% if newspapers %}
+        {% for newspaper in newspapers %}
         <li>
             <h2>{{ newspaper.title }}</h2>
             <p>{{ newspaper.content }}</p>
@@ -17,6 +26,10 @@
                 <button type="submit" class="btn btn-warning">Edit</button>
             </form> 
         </li>
-    {% endfor %}
+        {% endfor %}
+    {% else %}
+        <li>There is no such Title.</li>
+    {% endif %}
 </ul>
+
 {% endblock %}
