@@ -8,6 +8,7 @@ from django.views.generic import ListView, CreateView
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView, DeleteView
 from django.db.models import Q
+from django.core.paginator import Paginator
 
 
 class TopicListView(ListView):
@@ -117,9 +118,14 @@ def newspaper_list(request):
         newspapers = Newspaper.objects.filter(title__icontains=query)  # Поиск по заголовку
     else:
         newspapers = Newspaper.objects.all()  # Если нет запроса, выводим все газеты
-    
-    return render(request, 'newspaper_list.html', {'newspapers': newspapers})
-    
+
+    # Пагинация
+    paginator = Paginator(newspapers, 5)  # Показываем 10 газет на странице
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'newspaper_list.html', {'page_obj': page_obj, 'query': query})
+
 
 # Классовое представление с ограничением доступа
 class NewspaperListView(LoginRequiredMixin, ListView):
