@@ -1,4 +1,6 @@
+{% load static %}
 <div class="col-sm-3">
+    <img src="{% static 'css/img/media_newspaper1.png' %}" alt="Newspaper Logo" class="img-fluid">
     <ul class="list-group">
         <form method="post" action="{% url 'logout' %}">
             {% csrf_token %}
