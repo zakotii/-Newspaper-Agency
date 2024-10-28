@@ -11,6 +11,10 @@ from django.db.models import Q
 from django.core.paginator import Paginator
 
 
+#def index(request):
+    #return render(request, 'index.html')
+
+
 class TopicListView(ListView):
     model = Topic
     template_name = 'topic_list.html'

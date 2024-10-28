@@ -13,6 +13,7 @@ from .views import (RedactorUpdateView,
 )
 
 urlpatterns = [
+    #path('', views.index, name='index'),  # Главная страница
     path('newspapers/', views.newspaper_list, name='newspaper_list'),
     path('topic/', TopicListView.as_view(), name='topic_list'),
     path('admin_dashboard/', views.admin_dashboard, name='admin_dashboard'),
