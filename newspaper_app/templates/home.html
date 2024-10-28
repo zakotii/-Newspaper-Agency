@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
-{% block title %}Главная страница{% endblock %}
+{% block title %}Home page{% endblock %}
 
 {% block content %}
-    <h1>Добро пожаловать в Newspaper Agency</h1>
-    <h2>Информация</h2>
+    <h1>Welcome to Newspaper Agency</h1>
+    <h2>Information</h2>
     <ul>
-        <li>Количество газет: {{ newspaper_count }}</li>
-        <li>Количество редакторов: {{ redactor_count }}</li>
-        <li>Количество статей/тем: {{ topic_count }}</li>
+        <li>Number of newspapers: {{ newspaper_count }}</li>
+        <li>Number of editors: {{ redactor_count }}</li>
+        <li>Number of articles/topics: {{ topic_count }}</li>
     </ul>
     <p><a href="{% url 'newspaper_list' %}">View Newspapers</a></p>
 {% endblock %}

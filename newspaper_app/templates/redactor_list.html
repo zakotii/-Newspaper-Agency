@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
-{% block title %}Список редакторов{% endblock %}
+{% block title %}List of editors{% endblock %}
 
 {% block content %}
-    <h1>Список редакторов</h1>
+    <h1>List of editors</h1>
 
     <!-- Форма поиска -->
     <form method="GET" action="{% url 'redactor_list' %}" class="form-inline mb-3">
@@ -16,10 +16,10 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Имя</th>
-                    <th>Фамилия</th>
+                    <th>Name</th>
+                    <th>Surname</th>
                     <th>Email</th>
-                    <th>Дата найма</th>
+                    <th>Date of hire</th>
                 </tr>
             </thead>
             <tbody>
