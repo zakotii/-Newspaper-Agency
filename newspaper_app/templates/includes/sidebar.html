@@ -1,22 +1,22 @@
 {% load static %}
-<div class="col-sm-3">
+<div class="col-sm-3" style="border: none; background: transparent;">
     <img src="{% static 'css/img/media_newspaper1.png' %}" alt="Newspaper Logo" class="img-fluid">
     <ul class="list-group">
         <form method="post" action="{% url 'logout' %}">
             {% csrf_token %}
             <button type="submit" class="btn btn-danger">Logout</button>
         </form>
-        <li class="list-group-item">
+        <li class="list-group-item" style="border: none; background: transparent;">
             <span style="vertical-align:middle;">User:</span> <a href="{% url 'admin_dashboard' %}" class="btn btn-link">{{ user.username }}</a>
         </li>
         <!-- Другие ссылки в сайдбаре -->
-        <li class="list-group-item">
+        <li class="list-group-item" style="border: none; background: transparent;">
             <a href="{% url 'home' %}" class="btn btn-link">Home</a>
         </li>
-        <li class="list-group-item">
+        <li class="list-group-item" style="border: none; background: transparent;">
             <a href="{% url 'redactor_list' %}" class="btn btn-link">Редакторы</a>
         </li>
-        <li class="list-group-item">
+        <li class="list-group-item" style="border: none; background: transparent;">
             <a href="{% url 'topic_list' %}" class="btn btn-link">Статьи/Темы</a>
         </li>
     </ul>
