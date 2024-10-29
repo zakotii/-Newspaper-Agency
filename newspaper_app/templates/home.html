@@ -11,4 +11,7 @@
         <li>Number of articles/topics: {{ topic_count }}</li>
     </ul>
     <p><a href="{% url 'newspaper_list' %}">View Newspapers</a></p>
+    <p>You have visited this page
+        {{ num_visits }} time{{ num_visits|pluralize }}.
+    </p>
 {% endblock %}

@@ -105,11 +105,15 @@ def home(request):
     redactor_count = Redactor.objects.count()
     topic_count = Topic.objects.count()
 
+    num_visits = request.session.get("num_visits", 0)
+    request.session["num_visits"] = num_visits + 1
+
     # Передаем эти данные в шаблон
     context = {
         'newspaper_count': newspaper_count,
         'redactor_count': redactor_count,
         'topic_count': topic_count,
+        "num_visits": num_visits + 1,
     }
 
     return render(request, 'home.html', context)
