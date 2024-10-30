@@ -7,18 +7,17 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView, T
 from django.urls import reverse_lazy
 from django.db.models import Q
 
+
 class HomeView(LoginRequiredMixin, TemplateView):
     template_name = 'home.html'
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context.update({
-            'newspaper_count': Newspaper.objects.count(),
-            'redactor_count': Redactor.objects.count(),
-            'topic_count': Topic.objects.count(),
-            'num_visits': self.request.session.get('num_visits', 0) + 1,
-        })
-        self.request.session['num_visits'] = context['num_visits']
+        context['newspaper_count'] = Newspaper.objects.count()
+        context['redactor_count'] = Redactor.objects.count()
+        context['topic_count'] = Topic.objects.count()
+        context['num_visits'] = self.request.session.get("num_visits", 0) + 1
+        self.request.session["num_visits"] = context['num_visits']
+        context['newspapers'] = Newspaper.objects.all()
         return context
 
 
