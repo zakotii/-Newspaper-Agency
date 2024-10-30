@@ -1,197 +1,136 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
-from newspaper_app.models import Newspaper, Redactor, Topic  # Удалено дублирование
+from newspaper_app.models import Newspaper, Redactor, Topic
 from newspaper_app.forms import NewspaperForm
-from django.contrib.auth.decorators import login_required  # Для декораторов
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView
 from django.urls import reverse_lazy
-from django.views.generic import UpdateView, DeleteView
 from django.db.models import Q
-from django.core.paginator import Paginator
+
+class HomeView(LoginRequiredMixin, TemplateView):
+    template_name = 'home.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'newspaper_count': Newspaper.objects.count(),
+            'redactor_count': Redactor.objects.count(),
+            'topic_count': Topic.objects.count(),
+            'num_visits': self.request.session.get('num_visits', 0) + 1,
+        })
+        self.request.session['num_visits'] = context['num_visits']
+        return context
 
 
-#def index(request):
-    #return render(request, 'index.html')
+class AdminDashboardView(LoginRequiredMixin, TemplateView):
+    template_name = 'admin_dashboard.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'newspapers': Newspaper.objects.all(),
+            'redactors': Redactor.objects.all(),
+            'topics': Topic.objects.all()
+        })
+        return context
 
 
-class TopicListView(ListView):
+class NewspaperListView(LoginRequiredMixin, ListView):
+    model = Newspaper
+    template_name = 'newspaper_list.html'
+    context_object_name = 'newspapers'
+    paginate_by = 5  # Встроенная пагинация ListView
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        return Newspaper.objects.filter(title__icontains=query) if query else Newspaper.objects.all()
+
+
+class RedactorListView(LoginRequiredMixin, ListView):
+    model = Redactor
+    template_name = 'redactor_list.html'
+    context_object_name = 'redactors'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        return Redactor.objects.filter(first_name__icontains=query) if query else Redactor.objects.all()
+
+
+class TopicListView(LoginRequiredMixin, ListView):
     model = Topic
     template_name = 'topic_list.html'
     context_object_name = 'topics'
 
     def get_queryset(self):
-        queryset = super().get_queryset()
         query = self.request.GET.get('q')
-        if query:
-            queryset = queryset.filter(Q(name__icontains=query))
-        return queryset
+        return Topic.objects.filter(name__icontains=query) if query else Topic.objects.all()
 
 
-@login_required
-def admin_dashboard(request):
-    newspapers = Newspaper.objects.all()
-    redactors = Redactor.objects.all()
-    topics = Topic.objects.all()
+class NewspaperCreateView(LoginRequiredMixin, CreateView):
+    model = Newspaper
+    form_class = NewspaperForm
+    template_name = 'newspaper_form.html'
+    success_url = reverse_lazy('newspaper_list')
 
-    context = {
-        'newspapers': newspapers,
-        'redactors': redactors,
-        'topics': topics
-    }
-    
-    return render(request, 'admin_dashboard.html', context)
+    def form_valid(self, form):
+        messages.success(self.request, "Газета успешно создана.")
+        return super().form_valid(form)
 
-# Обновление газеты
-class NewspaperUpdateView(UpdateView):
+    def form_invalid(self, form):
+        messages.error(self.request, "Ошибка при создании газеты.")
+        return super().form_invalid(form)
+
+
+class RedactorCreateView(LoginRequiredMixin, CreateView):
+    model = Redactor
+    fields = ['first_name', 'last_name', 'email', 'hire_date']
+    template_name = 'redactor_form.html'
+    success_url = reverse_lazy('admin_dashboard')
+
+
+class TopicCreateView(LoginRequiredMixin, CreateView):
+    model = Topic
+    fields = ['name']
+    template_name = 'topic_form.html'
+    success_url = reverse_lazy('admin_dashboard')
+
+
+# Обновление и удаление
+class NewspaperUpdateView(LoginRequiredMixin, UpdateView):
     model = Newspaper
     fields = ['title', 'content', 'published_date', 'topic', 'redactor']
     template_name = 'newspaper_form.html'
     success_url = reverse_lazy('admin_dashboard')
 
-# Удаление газеты
-class NewspaperDeleteView(DeleteView):
+
+class RedactorUpdateView(LoginRequiredMixin, UpdateView):
+    model = Redactor
+    fields = ['first_name', 'last_name', 'email', 'hire_date']
+    template_name = 'redactor_form.html'
+    success_url = reverse_lazy('admin_dashboard')
+
+
+class TopicUpdateView(LoginRequiredMixin, UpdateView):
+    model = Topic
+    fields = ['name']
+    template_name = 'topic_form.html'
+    success_url = reverse_lazy('admin_dashboard')
+
+
+# Удаление
+class NewspaperDeleteView(LoginRequiredMixin, DeleteView):
     model = Newspaper
     template_name = 'newspaper_confirm_delete.html'
     success_url = reverse_lazy('admin_dashboard')
 
 
-# Обновление редактора (Redactor)
-class RedactorUpdateView(UpdateView):
-    model = Redactor
-    fields = ['first_name', 'last_name', 'email', 'hire_date']
-    template_name = 'redactor_form.html'
-    success_url = reverse_lazy('admin_dashboard')
-
-
-# Создание нового редактора (Redactor)
-class RedactorCreateView(CreateView):
-    model = Redactor
-    fields = ['first_name', 'last_name', 'email', 'hire_date']
-    template_name = 'redactor_form.html'
-    success_url = reverse_lazy('admin_dashboard')
-
-# Удаление редактора (Redactor)
-class RedactorDeleteView(DeleteView):
+class RedactorDeleteView(LoginRequiredMixin, DeleteView):
     model = Redactor
     template_name = 'redactor_confirm_delete.html'
     success_url = reverse_lazy('admin_dashboard')
 
 
-# Создание новой темы (Topic)
-class TopicCreateView(CreateView):
-    model = Topic
-    fields = ['name']
-    template_name = 'topic_form.html'
-    success_url = reverse_lazy('admin_dashboard')
-
-# Обновление темы (Topic)
-class TopicUpdateView(UpdateView):
-    model = Topic
-    fields = ['name']
-    template_name = 'topic_form.html'
-    success_url = reverse_lazy('admin_dashboard')
-
-# Удаление темы (Topic)
-class TopicDeleteView(DeleteView):
+class TopicDeleteView(LoginRequiredMixin, DeleteView):
     model = Topic
     template_name = 'topic_confirm_delete.html'
     success_url = reverse_lazy('admin_dashboard')
-
-
-def home(request):
-    # Подсчитываем количество газет, редакторов и статей
-    newspaper_count = Newspaper.objects.count()
-    redactor_count = Redactor.objects.count()
-    topic_count = Topic.objects.count()
-
-    num_visits = request.session.get("num_visits", 0)
-    request.session["num_visits"] = num_visits + 1
-
-    # Передаем эти данные в шаблон
-    context = {
-        'newspaper_count': newspaper_count,
-        'redactor_count': redactor_count,
-        'topic_count': topic_count,
-        "num_visits": num_visits + 1,
-    }
-
-    return render(request, 'home.html', context)
-
-# Список газет с поиском по заголовку
-@login_required
-def newspaper_list(request):
-    query = request.GET.get('q')  # Получаем параметр 'q' из GET запроса (поле поиска)
-    if query:
-        newspapers = Newspaper.objects.filter(title__icontains=query)  # Поиск по заголовку
-    else:
-        newspapers = Newspaper.objects.all()  # Если нет запроса, выводим все газеты
-
-    # Пагинация
-    paginator = Paginator(newspapers, 5)  # Показываем 10 газет на странице
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-
-    return render(request, 'newspaper_list.html', {'page_obj': page_obj, 'query': query})
-
-
-# Классовое представление с ограничением доступа
-class NewspaperListView(LoginRequiredMixin, ListView):
-    model = Newspaper
-    template_name = 'newspaper_list.html'
-    context_object_name = 'newspapers'  # Убедитесь, что используете это имя в шаблоне
-
-# Создание новой газеты
-@login_required  # Добавлен декоратор
-def newspaper_create(request):
-    if request.method == "POST":
-        form = NewspaperForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Газета успешно создана.")
-            return redirect('newspaper_list')
-        else:
-            messages.error(request, "Ошибка при создании газеты. Проверьте введённые данные.")
-    else:
-        form = NewspaperForm()
-    return render(request, 'newspaper_form.html', {'form': form})
-
-# Обновление газеты
-@login_required  # Добавлен декоратор
-def newspaper_update(request, pk):
-    newspaper = get_object_or_404(Newspaper, pk=pk)
-    if request.method == "POST":
-        form = NewspaperForm(request.POST, instance=newspaper)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Газета успешно обновлена.")
-            return redirect('newspaper_list')
-        else:
-            messages.error(request, "Ошибка при обновлении газеты. Проверьте введённые данные.")
-    else:
-        form = NewspaperForm(instance=newspaper)
-    return render(request, 'newspaper_form.html', {'form': form})
-
-# Список редакторов
-@login_required
-def redactor_list(request):
-    query = request.GET.get('q')  # Получаем поисковый запрос из GET-параметров
-    if query:
-        redactors = Redactor.objects.filter(first_name__icontains=query)  # Поиск по имени (регистронезависимый)
-    else:
-        redactors = Redactor.objects.all()  # Если запроса нет, отображаем всех редакторов
-    
-    return render(request, 'redactor_list.html', {'redactors': redactors})
-
-
-@login_required
-def topic_list(request):
-    query = request.GET.get('q')  # Получаем поисковый запрос, если он есть
-    if query:
-        # Если запрос есть, ищем темы по части строки (name содержит query)
-        topics = Topic.objects.filter(Q(name__icontains=query))
-    else:
-        # Если запроса нет, показываем все темы
-        topics = Topic.objects.all()
-
-    return render(request, 'topic_list.html', {'topics': topics})
