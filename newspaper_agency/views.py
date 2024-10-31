@@ -38,7 +38,7 @@ class NewspaperListView(LoginRequiredMixin, ListView):
     model = Newspaper
     template_name = 'newspaper_list.html'
     context_object_name = 'newspapers'
-    paginate_by = 5  # Встроенная пагинация ListView
+    paginate_by = 5
 
     def get_queryset(self):
         query = self.request.GET.get('q')

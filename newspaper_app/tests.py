@@ -59,11 +59,11 @@ class NewspaperTests(TestCase):
             'publishers': [self.redactor.id]
         })
 
-        # Вывод ошибок формы, если тест не удался
+        
         if response.status_code != 302:
             print("Ошибки формы:", response.context['form'].errors if 'form' in response.context else "Форма не найдена")
 
-        # Проверка кода ответа и успешного создания Newspaper
+        
         self.assertEqual(response.status_code, 302)
         self.assertTrue(Newspaper.objects.filter(title='Test Newspaper').exists())
 
@@ -71,13 +71,13 @@ class NewspaperTests(TestCase):
 
 class NewspaperTests(TestCase):
     def setUp(self):
-        # Создаем пользователя для тестов
+        
         self.user = get_user_model().objects.create_user(
             username="testuser", password="password"
         )
         self.client.login(username="testuser", password="password")
 
-        # Создаем тестового редактора и тему
+        
         self.redactor = Redactor.objects.create(
             first_name='Test',
             last_name='User',
@@ -87,7 +87,7 @@ class NewspaperTests(TestCase):
         self.topic = Topic.objects.create(name='Politics')
 
     def test_newspaper_create(self):
-        # Тест создания нового объекта Newspaper
+        
         response = self.client.post(reverse('newspaper_create'), {
             'title': 'Test Newspaper',
             'content': 'Test content',
@@ -98,10 +98,10 @@ class NewspaperTests(TestCase):
             'publishers': [self.redactor.id]
         })
 
-        # Если форма не валидна, выводим ошибки формы
+        
         if response.status_code != 302:
             print("Ошибки формы:", response.context['form'].errors if 'form' in response.context else "Форма не найдена")
 
-        # Проверяем успешное создание объекта Newspaper
+        
         self.assertEqual(response.status_code, 302, "Creation did not redirect")
         self.assertTrue(Newspaper.objects.filter(title='Test Newspaper').exists(), "Newspaper was not created")

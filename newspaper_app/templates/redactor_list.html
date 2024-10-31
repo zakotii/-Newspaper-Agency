@@ -5,13 +5,13 @@
 {% block content %}
     <h1>List of editors</h1>
 
-    <!-- Форма поиска -->
+    
     <form method="GET" action="{% url 'redactor_list' %}" class="form-inline mb-3">
         <input class="form-control mr-sm-2" type="search" placeholder="Search by first name" name="q" value="{{ request.GET.q }}">
         <button class="btn btn-outline-primary" type="submit">Search</button>
     </form>
 
-    <!-- Список редакторов -->
+    
     {% if redactors %}
         <table class="table table-striped">
             <thead>

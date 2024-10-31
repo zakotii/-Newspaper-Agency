@@ -12,7 +12,6 @@
     </ul>
     <p><a href="{% url 'newspaper_list' %}">View Newspapers</a></p>
     <p>You have visited this page {{ num_visits }} time{{ num_visits|pluralize }}.</p>
-    <!-- Added for debugging purposes -->
     <ul>
         {% for newspaper in newspapers %}
             <li>{{ newspaper.title }}</li>

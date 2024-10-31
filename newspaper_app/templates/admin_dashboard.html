@@ -7,7 +7,7 @@ Admin Dashboard
 {% block content %}
     <h1 class="mb-4">Admin Dashboard</h1>
     
-    <!-- Газеты -->
+    
     <h2>Newspapers</h2>
     <table class="table table-striped">
         <thead>
@@ -37,7 +37,7 @@ Admin Dashboard
         </tbody>
     </table>
 
-    <!-- Редакторы -->
+    
     <h2>Redactors</h2>
     <table class="table table-striped">
         <thead>
@@ -65,7 +65,7 @@ Admin Dashboard
         </tbody>
     </table>
 
-    <!-- Темы -->
+    
     <h2>Topics</h2>
     <table class="table table-striped">
         <thead>
@@ -87,7 +87,7 @@ Admin Dashboard
         </tbody>
     </table>
 
-    <!-- Кнопки для создания новых записей -->
+    
     <a href="{% url 'newspaper_create' %}" class="btn btn-success">Add New Newspaper</a>
     <a href="{% url 'redactor_create' %}" class="btn btn-success">Add New Redactor</a>
     <a href="{% url 'topic_create' %}" class="btn btn-success">Add New Topic</a>

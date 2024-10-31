@@ -8,13 +8,13 @@
 <body>
 <h1>List of topics</h1>
 
-<!-- Форма поиска -->
+
 <form method="GET" action="{% url 'topic_list' %}" class="form-inline mb-3">
     <input class="form-control mr-sm-2" type="search" placeholder="Search by topic" name="q" value="{{ request.GET.q }}">
     <button class="btn btn-outline-primary" type="submit">Search</button>
 </form>
 
-<!-- Список тем -->
+
 <ul>
     {% if topics %}
         {% for topic in topics %}

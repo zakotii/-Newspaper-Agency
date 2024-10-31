@@ -3,7 +3,7 @@
 {% block content %}
 <h1>List of Newspapers</h1>
 
-<!-- Форма поиска по заголовку -->
+
 <form method="GET" action="{% url 'newspaper_list' %}" class="form-inline mb-3">
     <input class="form-control mr-sm-2" type="search" placeholder="Search by Title" name="q" value="{{ request.GET.q }}">
     <button class="btn btn-outline-primary" type="submit">Search</button>
@@ -24,7 +24,7 @@
             </form>
         </li>
         {% endfor %}
-        <!-- Пагинация -->
+        
         <div class="pagination">
             <span class="step-links">
                 {% if page_obj.has_previous %}

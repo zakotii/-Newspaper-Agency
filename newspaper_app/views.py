@@ -6,12 +6,12 @@ from .forms import NewspaperForm
 def home(request):
     return render(request, 'home.html')
 
-# Список газет
+
 def newspaper_list(request):
     newspapers = Newspaper.objects.all()
     return render(request, 'newspaper_list.html', {'newspapers': newspapers})
 
-# Создание новой газеты
+
 def newspaper_create(request):
     if request.method == "POST":
         form = NewspaperForm(request.POST)
@@ -22,7 +22,7 @@ def newspaper_create(request):
         form = NewspaperForm()
     return render(request, 'newspaper_form.html', {'form': form})
 
-# Обновление газеты
+
 def newspaper_update(request, pk):
     newspaper = get_object_or_404(Newspaper, pk=pk)
     if request.method == "POST":
