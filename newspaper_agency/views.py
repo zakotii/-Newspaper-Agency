@@ -94,7 +94,6 @@ class TopicCreateView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('admin_dashboard')
 
 
-# Обновление и удаление
 class NewspaperUpdateView(LoginRequiredMixin, UpdateView):
     model = Newspaper
     fields = ['title', 'content', 'published_date', 'topic', 'redactor']
@@ -116,7 +115,6 @@ class TopicUpdateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('admin_dashboard')
 
 
-# Удаление
 class NewspaperDeleteView(LoginRequiredMixin, DeleteView):
     model = Newspaper
     template_name = 'newspaper_confirm_delete.html'

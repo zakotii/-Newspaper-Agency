@@ -1,8 +1,8 @@
 .btn-success {
-    background-color: #4CAF50; /* Изменение цвета фона */
+    background-color: #4CAF50;
     border-color: #6a4caf;
 }
 
 .btn-secondary:hover {
-    background-color: rgb(227, 15, 15); /* Изменение цвета фона при наведении */
+    background-color: rgb(227, 15, 15);
 }
