@@ -1,0 +1,250 @@
+[
+{
+    "model": "newspaper_app.topic",
+    "pk": 1,
+    "fields": {
+        "name": "Politics!"
+    }
+},
+{
+    "model": "newspaper_app.topic",
+    "pk": 2,
+    "fields": {
+        "name": "Crime"
+    }
+},
+{
+    "model": "newspaper_app.topic",
+    "pk": 3,
+    "fields": {
+        "name": "Bussines"
+    }
+},
+{
+    "model": "newspaper_app.topic",
+    "pk": 5,
+    "fields": {
+        "name": "Trade"
+    }
+},
+{
+    "model": "newspaper_app.topic",
+    "pk": 6,
+    "fields": {
+        "name": "Art"
+    }
+},
+{
+    "model": "newspaper_app.topic",
+    "pk": 7,
+    "fields": {
+        "name": "Weather"
+    }
+},
+{
+    "model": "newspaper_app.topic",
+    "pk": 9,
+    "fields": {
+        "name": "╬ld_topic"
+    }
+},
+{
+    "model": "newspaper_app.topic",
+    "pk": 10,
+    "fields": {
+        "name": "New_topic"
+    }
+},
+{
+    "model": "newspaper_app.topic",
+    "pk": 11,
+    "fields": {
+        "name": "Politics777!"
+    }
+},
+{
+    "model": "newspaper_app.redactor",
+    "pk": 2,
+    "fields": {
+        "first_name": "Maria",
+        "last_name": "Nezhin",
+        "email": "agrofond.tzov@gmail.com",
+        "hire_date": "2024-10-13"
+    }
+},
+{
+    "model": "newspaper_app.redactor",
+    "pk": 3,
+    "fields": {
+        "first_name": "Danyla",
+        "last_name": "Kropyvnytskyi",
+        "email": "kronaimpulsd@gmail.com",
+        "hire_date": "2024-10-12"
+    }
+},
+{
+    "model": "newspaper_app.redactor",
+    "pk": 4,
+    "fields": {
+        "first_name": "Sergey",
+        "last_name": "Pavlov",
+        "email": "evriola@ukr.net",
+        "hire_date": "2024-10-11"
+    }
+},
+{
+    "model": "newspaper_app.redactor",
+    "pk": 5,
+    "fields": {
+        "first_name": "Evgeniy",
+        "last_name": "Izmail",
+        "email": "lv386@ukr.net",
+        "hire_date": "2024-10-10"
+    }
+},
+{
+    "model": "newspaper_app.redactor",
+    "pk": 6,
+    "fields": {
+        "first_name": "Oksana",
+        "last_name": "Get",
+        "email": "transport@budmajster.com",
+        "hire_date": "2024-10-09"
+    }
+},
+{
+    "model": "newspaper_app.redactor",
+    "pk": 7,
+    "fields": {
+        "first_name": "Alexey",
+        "last_name": "Zaselje",
+        "email": "vasyutinskiy@ferrosistema.com.ua",
+        "hire_date": "2024-10-16"
+    }
+},
+{
+    "model": "newspaper_app.redactor",
+    "pk": 8,
+    "fields": {
+        "first_name": "Elena",
+        "last_name": "Mezhirichka",
+        "email": "ukrmintrade@ukr.net",
+        "hire_date": "2024-08-27"
+    }
+},
+{
+    "model": "newspaper_app.redactor",
+    "pk": 9,
+    "fields": {
+        "first_name": "Ludmila",
+        "last_name": "Cherkassy",
+        "email": "92776836231_gio_ggg@ukr.net",
+        "hire_date": "2024-10-30"
+    }
+},
+{
+    "model": "newspaper_app.newspaper",
+    "pk": 2,
+    "fields": {
+        "title": "US Presidential Debates (2024)",
+        "content": "The 2024 United States presidential debates are a series of debates between the candidates for President of the United States in the 2024 election. The first debate was held on June 27, 2024, between incumbent President Joe Biden and former President Donald Trump.",
+        "published_date": "2024-10-13",
+        "publication_date": "2024-06-27",
+        "topic": 1,
+        "redactor": 6,
+        "publishers": [
+            5
+        ]
+    }
+},
+{
+    "model": "newspaper_app.newspaper",
+    "pk": 5,
+    "fields": {
+        "title": "US Presidential Debates (2023)",
+        "content": "US Presidential Debates (2024)\r\nUS Presidential Debates (2024)\r\nUS Presidential Debates (2024)\r\nUS Presidential Debates (2024)",
+        "published_date": "2024-10-23",
+        "publication_date": "2024-10-21",
+        "topic": 1,
+        "redactor": 2,
+        "publishers": [
+            4
+        ]
+    }
+},
+{
+    "model": "newspaper_app.newspaper",
+    "pk": 6,
+    "fields": {
+        "title": "US Presidential Debates (2022)",
+        "content": "US Presidential Debates (2022)\r\nUS Presidential Debates (2022)\r\nUS Presidential Debates (2022)\r\nUS Presidential Debates (2022)\r\nUS Presidential Debates (2022)",
+        "published_date": "2024-10-23",
+        "publication_date": "2024-10-21",
+        "topic": 1,
+        "redactor": 7,
+        "publishers": [
+            5
+        ]
+    }
+},
+{
+    "model": "newspaper_app.newspaper",
+    "pk": 7,
+    "fields": {
+        "title": "US Presidential Debates (2021)",
+        "content": "The 2024 United States presidential debates are a series of debates between the candidates for President of the United States in the 2024 election. The first debate was held on June 27, 2024, between incumbent President Joe Biden and former President Donald Trump.",
+        "published_date": "2024-10-25",
+        "publication_date": "2024-10-21",
+        "topic": 1,
+        "redactor": 3,
+        "publishers": [
+            4
+        ]
+    }
+},
+{
+    "model": "newspaper_app.newspaper",
+    "pk": 8,
+    "fields": {
+        "title": "US Presidential Debates (2020)",
+        "content": "The 2024 United States presidential debates are a series of debates between the candidates for President of the United States in the 2024 election. The first debate was held on June 27, 2024, between incumbent President Joe Biden and former President Donald Trump.",
+        "published_date": "2024-10-25",
+        "publication_date": "2024-10-21",
+        "topic": 1,
+        "redactor": 7,
+        "publishers": [
+            5
+        ]
+    }
+},
+{
+    "model": "newspaper_app.newspaper",
+    "pk": 9,
+    "fields": {
+        "title": "US Presidential Debates (2019)",
+        "content": "The 2024 United States presidential debates are a series of debates between the candidates for President of the United States in the 2024 election. The first debate was held on June 27, 2024, between incumbent President Joe Biden and former President Donald Trump.",
+        "published_date": "2024-10-25",
+        "publication_date": "2024-10-21",
+        "topic": 1,
+        "redactor": 8,
+        "publishers": [
+            8
+        ]
+    }
+},
+{
+    "model": "newspaper_app.newspaper",
+    "pk": 10,
+    "fields": {
+        "title": "╟р ърцф√ь єёях°э√ь тхс-ёрщЄюь ёЄюшЄ яЁюфєьрээ√щ ш яюфЁюсэ√щ яЁюЎхёё.",
+        "content": "╟р ърцф√ь єёях°э√ь тхс-ёрщЄюь ёЄюшЄ яЁюфєьрээ√щ ш яюфЁюсэ√щ яЁюЎхёё. ┬ WAFFi ь√ єфхы хь тЁхь  Є∙рЄхы№эюьє яырэшЁютрэш■ ьръхЄр ш ёЄЁєъЄєЁ√ ърцфюую яЁюхъЄр, урЁрэЄшЁє , ўЄю ърцф√щ ¤ыхьхэЄ ёююЄтхЄёЄтєхЄ тшфхэш■ ш сшчэхё-яюЄЁхсэюёЄ ь ъышхэЄр. ▌ЄюЄ ¤Єря шьххЄ Ёх°р■∙хх чэрўхэшх фы  ёючфрэш  ЇєэъЎшюэры№эюую ш тшчєры№эю яЁштыхърЄхы№эюую фшчрщэр, ъюЄюЁ√щ фхщёЄтшЄхы№эю ЁрсюЄрхЄ",
+        "published_date": "2024-10-26",
+        "publication_date": "2024-10-21",
+        "topic": 5,
+        "redactor": 6,
+        "publishers": [
+            4
+        ]
+    }
+}
+]
