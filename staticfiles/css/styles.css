@@ -1,0 +1,8 @@
+.btn-success {
+    background-color: #4CAF50;
+    border-color: #6a4caf;
+}
+
+.btn-secondary:hover {
+    background-color: rgb(227, 15, 15);
+}
